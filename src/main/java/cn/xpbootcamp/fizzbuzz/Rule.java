@@ -1,19 +1,13 @@
 package cn.xpbootcamp.fizzbuzz;
 
-public class Rule {
-    private int amount;
-    private String value;
+public abstract class Rule {
+    protected String display;
 
-    public Rule(int amount, String value) {
-        this.amount = amount;
-        this.value = value;
+    public Rule(String display) {
+        this.display = display;
     }
 
-    public boolean match(int index) {
-        return index % amount == 0;
-    }
+    public abstract boolean match(int value);
 
-    public String getValue() {
-        return value;
-    }
+    public abstract String getDisplay();
 }

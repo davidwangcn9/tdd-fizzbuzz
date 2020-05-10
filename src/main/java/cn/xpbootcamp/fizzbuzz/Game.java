@@ -1,29 +1,25 @@
 package cn.xpbootcamp.fizzbuzz;
 
-import java.util.Stack;
+import java.util.List;
 
 public class Game {
 
-    private Stack<Rule> rules = new Stack<>();
+    private final RuleManager ruleManager;
 
-    public Game() {
-        rules.push(new Rule(3, "Fizz"));
-        rules.push(new Rule(5, "Buzz"));
-        rules.push(new Rule(7, "Whizz"));
-        rules.push(new Rule(3 * 7, "FizzWhizz"));
-        rules.push(new Rule(5 * 7, "BuzzWhizz"));
-        rules.push(new Rule(3 * 5, "FizzBuzz"));
-        rules.push(new Rule(3 * 5 * 7, "FizzBuzzWhizz"));
+    public Game(RuleManager ruleManager) {
+        this.ruleManager = ruleManager;
     }
 
-    public String fizzBuzz(int index) throws InvalidIndexException {
-        if (index < 1) throw new InvalidIndexException("Index should be bigger or equal to 1");
-        while (!rules.empty()) {
-            Rule current = rules.pop();
-            if (current.match(index)) {
-                return current.getValue();
+    public String fizzBuzz(int number) throws InvalidIndexException {
+        if (number < 1) throw new InvalidIndexException("Index should be bigger or equal to 1");
+        List<Rule> processedRules = ruleManager.generateRules(number);
+        for (int i = 0; i < processedRules.size(); i++) {
+            if (processedRules.get(i).match(number)) {
+                return processedRules.get(i).getDisplay();
             }
         }
-        return String.valueOf(index);
+        return String.valueOf(number);
     }
+
+
 }
