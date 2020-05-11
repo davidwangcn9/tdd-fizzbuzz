@@ -9,13 +9,9 @@ import java.util.stream.Collectors;
 public class RuleManager {
     private List<Rule> generateBaseRules() {
         List<Rule> rules = new ArrayList<>();
-        rules.add(new DivideRule(3 * 5 * 7, "FizzBuzzWhizz"));
-        rules.add(new DivideRule(3 * 5, "FizzBuzz"));
-        rules.add(new DivideRule(5 * 7, "BuzzWhizz"));
-        rules.add(new DivideRule(3 * 7, "FizzWhizz"));
-        rules.add(new DivideRule(7, "Whizz"));
-        rules.add(new DivideRule(5, "Buzz"));
         rules.add(new DivideRule(3, "Fizz"));
+        rules.add(new DivideRule(5, "Buzz"));
+        rules.add(new DivideRule(7, "Whizz"));
         return rules;
     }
 

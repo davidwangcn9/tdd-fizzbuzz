@@ -13,12 +13,20 @@ public class Game {
     public String fizzBuzz(int number) throws InvalidIndexException {
         if (number < 1) throw new InvalidIndexException("Index should be bigger or equal to 1");
         List<Rule> processedRules = ruleManager.generateRules(number);
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < processedRules.size(); i++) {
             if (processedRules.get(i).match(number)) {
-                return processedRules.get(i).getDisplay();
+                if (processedRules.get(i) instanceof ContainRule) {
+                    return processedRules.get(i).getDisplay();
+                }
+                sb.append(processedRules.get(i).getDisplay());
             }
         }
-        return String.valueOf(number);
+        if (!sb.toString().isEmpty()) {
+            return sb.toString();
+        } else {
+            return String.valueOf(number);
+        }
     }
 
 
