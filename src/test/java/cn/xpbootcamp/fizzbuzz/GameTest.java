@@ -3,6 +3,12 @@ package cn.xpbootcamp.fizzbuzz;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -112,6 +118,21 @@ public class GameTest {
 
         String word2 = game.fizzBuzz(73);
         assertThat(word2, is("Fizz"));
+    }
+
+    @Test
+    public void fizzBuzz_whenInputAllValue_shouldPass() throws IOException {
+        String fileName = this.getClass().getClassLoader().getResource("input.txt").getPath();
+
+        BufferedReader input = new BufferedReader(new FileReader(fileName));
+        String line = null;
+        int index = 0;
+        while ((line = input.readLine()) != null) {
+            line = line.replaceAll("\"", "");
+            String[] arrays = line.split(",");
+            System.out.println(++index + " Processing line:" + line);
+            assertThat(game.fizzBuzz(Integer.valueOf(arrays[0])), is(arrays[1].trim()));
+        }
     }
 
 }
